@@ -1,0 +1,51 @@
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: $font-text;
+    color: $color-grey-dark;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+.section {
+    background-color: #e9e9e9;
+    padding: 1px 0; 
+}
+
+.error_msg {
+    color: red;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.booking-error__msg {
+    text-align: center;
+    font-size: 30px;
+    color: #acacac;
+}
+
+.error-box {
+    text-align: center;
+    font-size: 14px;
+    background-color: #fadcd9;
+    padding: 10px 30px;
+    border: 2px solid #d40f0f;
+    margin: 15px 0;
+    font-weight: 600;
+}

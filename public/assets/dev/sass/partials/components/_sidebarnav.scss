@@ -1,0 +1,31 @@
+.sidebar-nav {
+    // margin-top: 4rem;
+}
+
+.sidebar-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav__item {
+    border-top: 1px dotted #d6d6d6;
+    transition: all .3s;
+
+    &:hover {
+        background-color: $color-primary;
+    }
+
+    &:last-child {
+        border-bottom: 1px dotted #d6d6d6;
+    }
+}
+
+.sidebar-nav__link {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #fff;
+    display: inline-block;
+    padding: .7rem 4rem;
+    width: 100%;
+}

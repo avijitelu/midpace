@@ -1,0 +1,34 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %}</title>
+    
+    {# google fonts #}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+
+    {# custom css #}
+    <link rel="stylesheet" href="{{ constant('CSS_PATH') }}/main.css">
+
+    {% block internal_css %}
+        {# inline css goes into this block #}
+    {% endblock %}
+    <script>
+        var BASE_HREF = "{{ constant('ROOTURL') }}";
+    </script>
+</head>
+<body>
+    {% block maincontent %}
+        {# website all content goes here #}
+    {% endblock %}
+
+    <script src="{{ constant('JS_PATH') }}/global.js"></script>
+    {% block javascript %}
+        {# javascript file include here #}
+    {% endblock %}
+</body>
+</html>
+{% endspaceless %}

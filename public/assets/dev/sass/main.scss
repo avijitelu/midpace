@@ -1,0 +1,34 @@
+// Basic style
+@import './partials/base/variables';
+@import './partials/base/utility';
+@import './partials/base/basic';
+@import './partials/base/typography';
+// Components
+@import './partials/components/button';
+@import './partials/components/navbar';
+@import './partials/components/sidebarnav';
+@import './partials/components/form';
+@import './partials/components/square_card';
+@import './partials/components/footer';
+@import './partials/components/error404';
+@import './partials/components/banner';
+@import './partials/components/card';
+@import './partials/components/spinner';
+@import './partials/components/modal';
+// Pages
+@import './partials/pages/home';
+@import './partials/pages/about';
+@import './partials/pages/contact_us';
+@import './partials/pages/login';
+// Doctors controller
+@import './partials/doctors/listings';
+@import './partials/doctors/profile';
+@import './partials/doctors/booking';
+// Admin controller
+@import './partials/admin/admin';
+@import './partials/admin/editprofile';
+@import './partials/admin/doctorlist';
+// Auth controller
+@import './partials/auth/admin_login';
+// Docpanel controller
+@import './partials/docpanel/index';

@@ -1,0 +1,18 @@
+{% extends "layout/base.html" %}
+
+{% block maincontent %}
+    <section class="admin mt-60">
+        <div class="admin-sidebar">
+            {% include "addon/sidebar_nav.html" %}
+        </div>
+        <div class="admin-content">
+            {% block admin_content %}
+                {# all admin related content goes here #}
+            {% endblock %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block js_content %}
+    
+{% endblock %}

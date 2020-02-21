@@ -1,0 +1,88 @@
+{% extends "layout/base.html" %}
+
+{% block maincontent %}
+<section class="section mt-60">
+    <div class="container">
+        <div class="docpanel">
+            <div class="docpanel__card">
+                <div class="docpanel__card-content">
+                    <h2>No. of People</h2>
+                    <p>{{ patient_list ? patient_list|length : 0  }}</p>
+                </div>
+            </div>
+            <div class="docpanel__card">
+                <div class="docpanel__card-content">
+                    <h2>Booking Status</h2>
+                    <span class="togggle-btn {{ user.booking_status ? "toggle-active" : "" }}" data-switch="off"></span>
+                </div>
+            </div>
+            <div class="docpanel__card">
+                <div class="docpanel__card-content">
+                    <h2>Urgent Notice</h2>
+                    <button class="primary-btn modal__open" data-modal="notice">Write Message</button>
+                </div>
+            </div>
+        </div>
+        <div class="docpanel__table">
+            <div class="docpanel__header">
+                <h2>Patient's Name List</h2>
+                <form id="delete-form" action="{{ constant('ROOTURL') }}/docpanel/delete-patients" method="POST">
+                    <button type="submit" id="delete-btn" class="warning-btn">Delete List</button>
+                </form>
+            </div>
+            <div class="docpanel__table-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Check</th>
+                            <th>Name</th>
+                            <th>Mobile No.</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in patient_list %}
+                            {% set count = 1 + count %}
+                            <tr>
+                                <td>{{ count }}</td>
+                                <td><input type="checkbox"></td>
+                                <td>{{ patient.name }}</td>
+                                <td>{{ patient.mobile }}</td>
+                                <td>{{ patient.location }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{# MODAL #}
+<section class="modal" id="notice">
+    <div class="modal__container">
+        <span class="modal__close-btn">&times;</span>
+        <div class="modal__header">
+            <h2 class="modal__title">URGENT NOTICE</h2>
+        </div>
+        <div class="modal__body">
+            <form class="form" id="js-docnotice__form" action="{{ constant('ROOTURL') }}/docpanel" method="POST">
+                <div class="form__group">
+                    <textarea name="message" id="js-urgent-notice" cols="30" rows="6" class="form__input form__input--grey-light">{{ user.urgent_notice }}</textarea>
+                    <span class="error_msg"></span>
+                </div>
+                <div class="form__group">
+                    <button class="btn btn__search" id="js-notice-btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+</script>
+<script src="{{ constant('JS_PATH') }}/docpanel_index.js"></script>
+{% endblock %}

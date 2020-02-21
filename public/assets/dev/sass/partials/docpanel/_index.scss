@@ -1,0 +1,138 @@
+.docpanel {
+    display: flex;
+    margin: 10px 0;
+
+    @media (max-width: 552px) {
+        flex-direction: column;
+    }
+}
+
+.docpanel__card {
+    flex: 1 0 0;
+    padding: 0 10px;
+    margin: 10px 0;
+}
+
+.docpanel__card-content {
+    background-color: #fff;
+    text-align: center;
+    padding: 15px;
+    height: 100%;
+    border-radius: 3px;
+}
+
+.docpanel__card-content h2 {
+    font-size: 25px;
+    line-height: 1.2;
+
+    @media (max-width: 552px) {
+        font-size: 20px;
+    }
+}
+
+.docpanel__card-content p {
+    font-size: 50px;
+    margin: 0;
+    line-height: 1;
+    font-weight: 700;
+    color: #a8a8a8;
+
+    @media (max-width: 552px) {
+        font-size: 25px;
+    }
+}
+
+.togggle-btn {
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+    position: relative;
+    padding: 5px;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    transition: all .4s;
+}
+
+.togggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: all .3s;
+}
+
+.toggle-active {
+    background-color: #2196F3;
+}
+
+.toggle-active::before {
+    transform: translateX(24px);
+}
+
+/*    Docpanel table
+------------------------------------------------------------------- */
+.docpanel__table {
+    background-color: #fff;
+    margin: 0 10px 15px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.docpanel__header {
+    background-color: #4b4b4b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.docpanel__header h2 {
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+    margin: 0;
+
+    @media (max-width: 552px) {
+        font-size: 18px;
+    }
+}
+
+.docpanel__header form {
+    margin: 0;
+}
+
+.docpanel__table-body {
+    padding: 15px;
+
+    @media (max-width: 552px) {
+        max-width: 552px;
+        overflow-x: auto;
+    }
+}
+
+.docpanel__table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.docpanel__table table tr td,
+.docpanel__table table tr th {
+    padding: 8px 10px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.docpanel__table table thead tr {
+    background-color: #2b63ac;
+    color: #fff;
+}
+
+.docpanel__table table tbody tr:nth-child(even) {
+    background-color: #eeeeee;
+}

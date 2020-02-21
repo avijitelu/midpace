@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+
+{% block maincontent %}
+    <header class="banner-section">
+        {% include "components/banner.html" %}
+    </header>
+    <section class="container">
+        {# category section of the website #}
+        <div class="category">
+            <h2 class="heading__primary center-align">Select from categories</h2>
+            <p class="category__text center-align">Now Find a doctor according to your need is very easy, <br> here you can choose doctors from different categories</p>
+            <div class="category__option">
+                <div class="category__option-container">
+                    {% include "components/square_card.html" %}
+                </div>
+            </div>
+        </div>
+
+        {# why us section #}
+        <section class="why-us">
+            <div class="why-us__img">
+                <img src="{{ constant('IMAGE_PATH') }}/handshak.jpg" alt="Handshak image">
+            </div>
+            <div class="why-us__text">
+                <h2 class="why-us__heading center-align">Why we are here?</h2>
+                <div class="why-us_text">
+                    Midpace.com is an extensive search engine for the people who are seeking information about doctors. One can rely on midpace.com for getting most brief and relevant data on doctors in Midnapore. People can use midpace.com as one stop destination to search about doctors.
+                    <ul>
+                        <li>We want to make your life more easier.</li>
+                        <li>We are not charging any money for our service.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock %}

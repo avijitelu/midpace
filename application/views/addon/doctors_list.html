@@ -1,0 +1,37 @@
+{% extends "addon/admin_base.html" %}
+
+{% block admin_content %}
+    <table class="doctor-table">
+        <tr class="doctor-table-tr">
+            <th class="doctor-table-th">Name</th>
+            <th class="doctor-table-th">Email</th>
+            <th class="doctor-table-th">Speciality</th>
+            <th class="doctor-table-th">Edit</th>
+            <th class="doctor-table-th">Delete</th>
+        </tr>
+        {% for user in users %}
+            <tr class="doctor-table-tr">
+                <td class="doctor-table-td">{{ user.fname ~ ' ' ~ user.lname }}</td>
+                <td class="doctor-table-td">{{ user.email }}</td>
+                <td class="doctor-table-td">{{ user.speciality }}</td>
+                <td class="doctor-table-td"><a href="{{ constant('ROOTURL') }}/addon/edit-profile/{{ user.id }}-{{ user.fname|lower ~ '-' ~ user.lname|lower }}">Edit</a></td>
+                <td class="doctor-table-td"><a href="{{ constant('ROOTURL') }}/addon/delete-profile/{{ user.id }}-{{ user.fname|lower ~ '-' ~ user.lname|lower }}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if max_pages > 1 %}
+        <div class="next-prev-container">
+            {% if current_page > 1 %}
+                <a href="{{ constant('ROOTURL') }}/addon/doctor-list/page={{ current_page - 1 }}" class="btn btn__prev">&larr; Prev</a>
+            {% else %}
+                <a class="btn btn__prev--disable">&larr; Prev</a>
+            {% endif %}
+
+            {% if current_page < max_pages %}
+                <a href="{{ constant('ROOTURL') }}/addon/doctor-list/page={{ current_page + 1 }}" class="btn btn__next">Next &rarr;</a>
+            {% else %}
+                <a class="btn btn__prev--disable">Next &rarr;</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

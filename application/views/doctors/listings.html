@@ -1,0 +1,81 @@
+{% extends "layout/base.html" %}
+
+{% block maincontent %}
+    <section class="section mt-60">
+        <div class="container doctor-listing">
+            <div class="sidebar">
+                <h2 class="sidebar__heading">Categories</h2>
+                <div class="sidebar__category">
+                    <ul class="sidebar__list">
+                        {% for speciality in specialities %}
+                            <li class="sidebar__item">
+                                <a href="{{ constant('ROOTURL') }}/doctors/search/{{ speciality.speciality_link|url_encode|lower }}" class="sidebar__link">{{ speciality.speciality_name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="top-bar">
+                    <p class="top-bar__heading">Doctors</p>
+                    <div class="search">
+                        <form action="{{ constant('ROOTURL') }}/doctors/search" class="form">
+                            <div class="form__group">
+                                <input type="text" class="form__input top-bar__search form__input--grey" name="search" placeholder="Search here by doctor's name">
+                                <button class="btn btn__icon">
+                                    <svg class="search__icon">
+                                        <use xlink:href="#icon-search"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="listing" id="js-listing">
+                    {% if doctors is not empty %}
+                        {% include "components/card.html" %}
+                    {% else %}
+                        <div class="search-error">
+                            <h1 class="search-error__msg">No doctors found</h1>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if no_of_pages >= 2 %}
+                    <div class="loadmore-btn" id="js-loadmore-btn">
+                        <a class="btn btn__search" id="js-loadmore-link" ajaxify="{{ajax_url}}">Load more</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {# category filter floating button #}
+    <button class="category-filter">
+        <svg class="category-filter__icon"><use xlink:href="#icon-filter"></use></svg>
+    </button>
+
+    <section class="mob-category">
+        <ul class="mob-category__list">
+            {% for speciality in specialities %}
+                <li class="mob-category__item">
+                    <a href="{{ constant('ROOTURL') }}/doctors/search/{{ speciality.speciality_link|url_encode|lower }}" class="mob-category__link">{{ speciality.speciality_name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <div class="spinner-box" id="js-spinner-box" style="display:none;">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        let noOfPages = "{{ no_of_pages }}";
+    </script>
+    <script src="{{ constant('JS_PATH') }}/doctor_listings.js"></script>
+{% endblock %}

@@ -1,0 +1,157 @@
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+}
+
+.navbar {
+    max-width: 124rem;
+    height: 6rem;
+    margin: 0 auto;
+    
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__logo {
+    padding-left: 2rem;
+}
+
+.navbar__logo-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: $color-grey-dark;
+}
+
+.navbar__nav {
+
+    @media(max-width: 650px) {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: $color-primary;
+        transition: all .4s;
+    }
+}
+
+.navbar__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    display: flex;
+
+    @media(max-width: 650px) {
+        display: block;
+    }
+}
+
+.navbar__item {
+    transition: all .2s;
+
+    &:hover {
+        background-color: $color-primary;
+    }
+}
+
+.navbar__link {
+    text-decoration: none;
+    text-transform: uppercase;
+    height: 6rem;
+    padding: 0 2rem;
+    transition: all .2s;
+    cursor: pointer;
+    user-select: none;
+
+    font-size: 1.3rem;
+    color: #505763;
+
+    display: flex;
+    align-items: center;
+
+    @media(max-width: 650px) {
+        color: #fff;
+    }
+}
+
+.navbar__link i {
+    margin-left: 5px;
+    margin-top: -3px;
+}
+
+.navbar__item:hover .navbar__link {
+    color: #fff;
+}
+
+.mobile-nav {
+    padding-right: 2rem;
+    cursor: pointer;
+    display: none;
+
+    @media(max-width: 650px) {
+        display: block;
+    }
+}
+
+.mobile-nav__btn {
+    width: 20px;
+    height: 3px;
+    display: block;
+    background-color: #393939;
+
+    &:not(:last-child) {
+        margin-bottom: 3px;
+    }
+}
+
+.active-nav {
+    background-color: $color-primary;
+}
+
+.active-nav .navbar__link {
+    color: #fff;
+}
+
+// Dropdown style
+.dropdown {
+    position: relative;
+}
+
+.dropdown__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    width: 200px;
+    margin: 0;
+    padding: 10px 0;
+    list-style: none;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    display: none;
+}
+
+.dropdown:hover .dropdown__menu {
+    display: block;
+}
+
+.dropdown__link {
+    display: inline-block;
+    width: 100%;
+    padding: 5px 24px;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: #505763;
+    // text-transform: uppercase;
+}
+
+.dropdown__link:hover {
+    background-color: #f3f3f3;
+}

@@ -1,0 +1,134 @@
+.card {
+    width: calc((100% - (6 * 1rem)) / 3);
+    margin: 1rem;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    position: relative;
+
+    @media(max-width: 888px) {
+        width: calc((100% - (4 * 1rem)) / 2);
+    }
+
+    @media(max-width: 550px) {
+        margin: .5rem;
+        width: calc((100% - (4 * .5rem)) / 2);
+    }
+}
+
+.card__bg {
+    background-image: url('../../../images/card-bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    height: 120px;
+
+    @media(max-width: 550px) {
+        height: 100px;
+    }
+}
+
+.card__img {
+    border-radius: 50%;
+    padding: 2.5rem;
+    
+}
+
+.card__img img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+
+    @media(max-width: 550px) {
+        width: 55px;
+        height: 55px;
+        border: 2px solid #fff;
+    }
+}
+
+.card__view-btn {
+    position: absolute;
+    top: 80px;
+    right: 2.5rem;
+
+    @media(max-width: 550px) {
+        top: 78px;
+        right: 1rem;
+    }
+}
+
+.card__info {
+    padding: 0 2.5rem;
+
+    @media(max-width: 550px) {
+        padding: 0 1rem;
+    }
+}
+
+.card__doctor-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin: 1rem 0 0 0;
+
+    @media(max-width: 550px) {
+        font-size: 1.4rem;
+    }
+}
+
+.card__doctor-special {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: #ababab;
+
+    @media(max-width: 550px) {
+        font-size: 1.2rem;
+    }
+}
+
+.time {
+    padding: 0 2.5rem;
+    margin-top: 1rem;
+
+    @media(max-width: 550px) {
+        padding: 0 1rem;
+        margin-top: 5px;
+    }
+}
+
+.time__icon {
+    width: 2rem;
+    height: 2rem;
+    fill: $color-primary;
+    vertical-align: middle;
+
+    @media(max-width: 550px) {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.time__link {
+    text-decoration: none;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+
+    @media(max-width: 550px) {
+        font-size: 1.2rem;
+        margin-left: 5px;
+    }
+}
+
+.card__about {
+    padding: 0 2.5rem 2.5rem 2.5rem;
+    margin: 1rem 0 0 0;
+    font-size: 1.3rem;
+    color: #ababab;
+
+    @media(max-width: 550px) {
+        font-size: 1rem;
+        padding: 0 1rem 1rem 1rem;
+    }
+}

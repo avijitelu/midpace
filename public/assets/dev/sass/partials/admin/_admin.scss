@@ -1,0 +1,13 @@
+.admin {
+    display: flex;
+}
+
+.admin-sidebar {
+    flex: 0 0 20%;
+    background-color: #b9b9b9;
+}
+
+.admin-content {
+    padding: 6rem 4rem;
+    flex: 0 0 80%;
+}

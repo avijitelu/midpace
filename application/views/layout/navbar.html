@@ -1,0 +1,48 @@
+<section class="navigation">
+    <nav class="navbar">
+        <div class="navbar__logo">
+            <a class="navbar__logo-name" href="{{ constant('ROOTURL') }}">midpace</a>
+        </div>
+        <div class="navbar__nav" id="js-navbar__nav">
+            <ul class="navbar__list">
+                <li class="navbar__item {% if get['request_controller'] == 'Home' %} active-nav {% endif %}">
+                    <a href="{{ constant('ROOTURL') }}" class="navbar__link">Home</a>
+                </li>
+                <li class="navbar__item {% if get['request_controller'] == 'Doctors' %} active-nav {% endif %}">
+                    <a href="{{ constant('ROOTURL') }}/doctors" class="navbar__link">Doctors</a>
+                </li>
+                <li class="navbar__item {% if get['request_controller'] == 'About' %} active-nav {% endif %}">
+                    <a href="{{ constant('ROOTURL') }}/about" class="navbar__link">About Us</a>
+                </li>
+                <li class="navbar__item {% if get['request_controller'] == 'ContactUs' %} active-nav {% endif %}">
+                    <a href="{{ constant('ROOTURL') }}/contact-us" class="navbar__link">Contact Us</a>
+                </li>
+                {% if session['email'] %}
+                    <li class="navbar__item dropdown">
+                        <a class="navbar__link">{{ session['fname'] }} <i class="fas fa-sort-down"></i></a>
+                        <ul class="dropdown__menu">
+                            <li class="dropdown__item">
+                                <a href="{{ constant('ROOTURL') }}/docpanel" class="dropdown__link">Dashboard</a>
+                            </li>
+                            <li class="dropdown__item">
+                                <a href="#" class="dropdown__link">Change Password</a>
+                            </li>
+                            <li class="dropdown__item">
+                                <a href="{{ constant('ROOTURL') }}/auth/logout" class="dropdown__link">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="navbar__item">
+                        <a href="{{ constant('ROOTURL') }}/auth/login" class="navbar__link">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="mobile-nav" id="js-mobile-nav">
+            <span class="mobile-nav__btn"></span>
+            <span class="mobile-nav__btn"></span>
+            <span class="mobile-nav__btn"></span>
+        </div>
+    </nav>
+</section>

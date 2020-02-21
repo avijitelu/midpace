@@ -1,0 +1,26 @@
+{% for doctor in doctors %}
+<div class="card">
+    <div class="card__bg">
+        <div class="card__img">
+            <img title="{{ "Dr. " ~ doctor.fname ~ " " ~ doctor.lname }}" src="{{ constant('IMAGE_PATH') }}/users/{{ doctor.user_img }}" alt="Profile picture - {{ doctor.fname ~ " " ~ doctor.lname }}">
+        </div>
+    </div>
+    <div class="card__view-btn">
+        <a href="{{ constant('ROOTURL') }}/doctors/profile/{{ doctor.id }}-{{ doctor.fname|lower }}-{{ doctor.lname|lower }}" class="btn btn__view-profile">View Profile</a>
+    </div>
+    <div class="card__info">
+        <p class="card__doctor-name">Dr. {{ doctor.fname }} {{ doctor.lname }}</p>
+        <p class="card__doctor-special">{{ doctor.speciality }}</p>
+    </div>
+    {# <div class="time">
+        <svg class="time__icon">
+            <use xlink:href="#icon-time"></use>
+        </svg>
+        <a href="#" class="time__link">See all timings</a>
+    </div> #}
+    <!-- <p class="card__about">{{ doctor.about }}</p> -->
+    <div class="card__btn-container">
+        <a href="{{ constant('ROOTURL') }}/doctors/booking/{{ doctor.id }}-{{ doctor.fname|lower }}-{{ doctor.lname|lower }}" class="primary-btn">Make Appointment</a>
+    </div>
+</div>
+{% endfor %}

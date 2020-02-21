@@ -1,0 +1,121 @@
+{% extends "layout/base.html" %}
+
+{% block maincontent %}
+    <section class="profile mt-60">
+        <div class="profile__cover"></div>
+        <div class="profile__intro">
+            <div class="profile__img">
+                <img title="{{ "Dr. " ~ doctor.fname ~ " " ~ doctor.lname }}" src="{{ constant('IMAGE_PATH') }}/users/{{ doctor.user_img }}" alt="Profile picture - {{ doctor.fname ~ " " ~ doctor.lname }}">
+            </div>
+            <h2 class="profile__name">Dr. {{ doctor.fname ~ " " ~ doctor.lname }}</h2>
+            <p class="profile__specialist">{{ doctor.speciality }}</p>
+            <p class="profile__about">{{ doctor.about }}</p>
+        </div>
+        <div class="profile__nav">
+            <div class="profile__nav-link" data-tab="time">Address & Timing</div>
+            <div class="profile__nav-link" data-tab="personal">Personal Info</div>
+            {# <div class="profile__nav-link" data-tab="education">Education</div> #}
+        </div>
+        <div class="profile__container">
+            <div class="container">
+                {# address and timing tab #}
+                <div class="profile__details" id="js-time">
+                    <h2 class="profile__heading">Address & Timing</h2>
+                    {% if chambers is not empty %}
+                    {% for chamber in chambers %}
+                        <div class="profile__details-box">
+                            <div class="profile__adddress">
+                                <span class="profile__address-label">Address</span>
+                                <p class="profile__address-full">
+                                    {{ chamber.address }} <br>
+                                    {{ chamber.city }}, {{ chamber.district }}, <br>
+                                    {{ chamber.state }}, {{ chamber.pincode }}
+                                </p>
+                            </div>
+                            <div class="profile__time">
+                                {% for day in ['monday', 'tuesday', 'wednesday', 'thusday', 'friday', 'saturday', 'sunday'] %}
+                                    {% set start = day ~ "_start" %}
+                                    {% set end = day ~ "_end" %}
+                                <div class="profile__time-box">
+                                    <p class="profile__time-day">{{ day }}</p>
+                                    <div class="profile__time-timing">
+                                        {% for key in chamber.time|keys %}
+                                            <p>{{ chamber.time[key][start]|date("H:i") }}-{{ chamber.time[key][end]|date("H:i") }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                        <div class="profile__details-box">
+                            <h1 style="text-align:center;font-size:30px;color:#aaa;">Details not available</h1>
+                        </div>
+                    {% endif %}
+                </div>  {# end address and timing #}
+
+                {# personal information tab #}
+                <div class="profile__details" id="js-personal">
+                    <h2 class="profile__heading">Personal Information</h2>
+                    <div class="profile__details-box">
+                        <div class="profile__flex">
+                            <div class="profile__personal">
+                                <span class="profile__address-label">Registration No.</span>
+                                <p class="profile__address-full">{{ doctor.reg_no ? doctor.reg_no : "Nil" }}</p>
+                            </div>
+                            <div class="profile__personal">
+                                <span class="profile__address-label">Date of birth</span>
+                                <p class="profile__address-full">{{ doctor.dob ? doctor.dob|date("dS F") : "Nil" }}</p>
+                            </div>
+                            <div class="profile__personal">
+                                <span class="profile__address-label">Gender</span>
+                                <p class="profile__address-full">{{ doctor.gender ? doctor.gender : "Nil" }}</p>
+                            </div>
+                            <div class="profile__personal">
+                                <span class="profile__address-label">Year of experience</span>
+                                <p class="profile__address-full">{{ doctor.year_exp ? doctor.year_exp : "Nil" }}</p>
+                            </div>
+                        </div>
+                        <div class="profile__flex">
+                            <div class="profile__personal">
+                                <span class="profile__address-label">Current location</span>
+                                <p class="profile__address-full">{{ doctor.current_location ? doctor.current_location : "Nil" }}</p>
+                            </div>
+                            <div class="profile__personal">
+                                <span class="profile__address-label">Hometown</span>
+                                <p class="profile__address-full">{{ doctor.home_location ? doctor.home_location : "Nil" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>  {# end personal information #}
+
+                {# education tab #}
+                {# <div class="profile__details" id="js-education">
+                    <h2 class="profile__heading">Education & Qualification</h2>
+                    <div class="profile__details-box">
+                        <div class="profile__education">
+                            <span class="profile__address-label">University</span>
+                            <p class="profile__address-full">West Bengal University of Health Sciences</p>
+                            <p class="profile__address-sub">MD in Medicine, 2015</p>
+                        </div>
+                        <div class="profile__education">
+                            <span class="profile__address-label">College</span>
+                            <p class="profile__address-full">Calcutta Medical College and Hospital</p>
+                            <p class="profile__address-sub">MBBS, 2012</p>
+                        </div>
+                        <div class="profile__education">
+                            <span class="profile__address-label">School</span>
+                            <p class="profile__address-full">Nirmal Hriday Ashram (Boy's) High School</p>
+                            <p class="profile__address-sub">year of passing 2002</p>
+                        </div>
+                    </div>
+                </div> #}  {# end education tab #}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ constant('JS_PATH') }}/doctor_profile.js"></script>
+{% endblock %}

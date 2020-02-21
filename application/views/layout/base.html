@@ -1,0 +1,63 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ page_title }}</title>
+
+    <meta name="description" content="{{ page_description }}">
+    {% if page_keywords %}
+        <meta name="keywords" content="{{ page_keywords }}">
+    {% endif %}
+
+    {% if og_tags %}
+        <meta property="og:site_name" content="Midpace">
+        <meta property="og:type" content="Website">
+        <meta property="og:title" content="">
+        <meta property="og:description" content="">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+    {% endif %}
+    
+    {# website favicon #}
+    <link rel="shortcut icon" sizes="32x32" href="{{ constant('IMAGE_PATH') }}/favicon-32x32.jpg" type="image/jpg">
+    
+    {# google fonts #}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+
+    {# fontawesome #}
+    <script src="https://kit.fontawesome.com/fea5df7e27.js" crossorigin="anonymous"></script>
+
+    {# custom css #}
+    <link rel="stylesheet" href="{{ constant('CSS_PATH') }}/main.css">
+
+    {% block internal_css %}
+        {# inline css goes into this block #}
+    {% endblock %}
+    <script>
+        var BASE_HREF = "{{ constant('ROOTURL') }}";
+    </script>
+</head>
+<body>
+    {# SVG icons #}
+    {% include "common/svg_sprite.html" %}
+
+    {# navigation menu #}
+    {% include "layout/navbar.html" %}
+
+    {% block maincontent %}
+        {# website all content goes here #}
+    {% endblock %}
+
+    {# website footer #}
+    {% include "layout/footer.html" %}
+
+    <script src="{{ constant('JS_PATH') }}/global.js"></script>
+    {% block javascript %}
+        {# javascript file include here #}
+    {% endblock %}
+</body>
+</html>
+{% endspaceless %}

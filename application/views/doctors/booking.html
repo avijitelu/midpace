@@ -1,0 +1,94 @@
+{% extends "layout/base.html" %}
+
+{% block maincontent %}
+    <section class="section mt-60">
+        <div class="container">
+            <div class="booking">
+                <div class="booking__doctor">
+                    <div class="booking__doctor-img">
+                        <img src="{{ constant('IMAGE_PATH') }}/users/{{ doctor.user_img }}" alt="">
+                    </div>
+                    <div class="booking__doctor-info">
+                        <h3 class="booking__doctor-name">{{ doctor.fname ~ ' ' ~ doctor.lname }}</h3>
+                        <p class="booking__doctor-speciality">{{ doctor.speciality }}</p>
+                        <div class="booking__doctor-address">
+                            <span>Chamber Address</span>
+                            {% for chamber in chambers %}
+                                <p>
+                                    {{ chamber.address }}, {{ chamber.city }}, <br> 
+                                    {{ chamber.district }}, {{ chamber.state ~ '-' ~ chamber.pincode }}
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% if doctor.urgent_notice %}
+                    <p class="booking__doctor-msg">{{ doctor.urgent_notice }}</p>
+                {% endif %}
+                <div class="booking__area">
+                    <div class="booking__form">
+                        <form id="js-booking__form" action="{{ constant('ROOTURL') }}/doctors/booking" method="POST">
+                            <div class="booking__form-group">
+                                <label class="booking__form-label">Name*</label>
+                                <input type="text" id="js-booking-name" class="booking__form-input" name="name">
+                                <span class="error_msg"></span>
+                            </div>
+                            <div class="booking__form-group">
+                                <label class="booking__form-label">Mobile No.*</label>
+                                <input type="text" id="js-booking-mobile" class="booking__form-input" name="mobile">
+                                <span class="error_msg"></span>
+                            </div>
+                            <div class="booking__form-group">
+                                <label class="booking__form-label">City / Town / Village</label>
+                                <input type="text" id="js-booking-location" class="booking__form-input" name="location">
+                                <span class="error_msg"></span>
+                            </div>
+                            <div class="booking__form-group">
+                                <input type="hidden" id="js-booking-docId" class="booking__form-input" name="doc_id" value="{{ doctor.id }}">
+                            </div>
+                            <div class="booking__form-group">
+                                {% if doctor.booking_status == 1 %}
+                                    <button id="js-booking-btn" class="primary-btn">Book Now</button>
+                                {% else %}
+                                    <div class="error-box">
+                                        <span>Booking is currently unavailable</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                    <div class="booking__list">
+                        <h2 class="booking__list-title">Patient Name List</h2>
+                        {% if patients %}
+                        <table class="booking__list-table">
+                            <thead>
+                                <tr>
+                                    <th>Sl No.</th>
+                                    <th>Name</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for patient in patients %}
+                                {% set no = no + 1 %}
+                                    <tr>
+                                        <td>{{ no }}</td>
+                                        <td>{{ patient.name }}</td>
+                                        <td>{{ patient.location }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                            <h2 class="booking-error__msg">List not Available</h2>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ constant('JS_PATH') }}/doctor_booking.js"></script>
+{% endblock %}

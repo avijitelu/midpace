@@ -1,0 +1,123 @@
+.btn {
+    border: 0;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn__search {
+    padding: 14px 20px;
+    background-color: $color-primary;
+    color: #fff;
+    font-size: 1.5rem;
+    transition: all .2s;
+
+    &:hover {
+        background-color: #50a0cf;
+    }
+}
+
+.btn__icon {
+    height: 35px;
+    padding: 8px 10px;
+    background-color: #f1f1f1;
+    transition: all .2s;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &:hover {
+        background-color: $color-primary;
+    }
+}
+
+.search__icon {
+    width: 20px;
+    height: 20px;
+    fill: #797979;
+    transition: all .2s;
+}
+
+.btn__icon:hover .search__icon {
+    fill: #fff;
+}
+
+.btn__view-profile {
+    background-color: $color-primary;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    border-radius: 100px;
+    transition: all .2s;
+
+    &:hover {
+        background-color: $color-primary-dark;
+    }
+
+    @media(max-width: 550px) {
+        padding: 3px 5px;
+        font-size: 1rem;
+    }
+}
+
+.btn__prev {
+    margin-right: 1rem;
+}
+
+.btn__next, .btn__prev {
+    background-color: $color-primary;
+    font-size: 1.4rem;
+    color: #fff;
+    padding: 1rem 1.5rem;
+}
+
+.btn__prev--disable {
+    font-size: 1.4rem;
+    background-color: #a7cee6;
+    color: $color-grey-light--1;
+    padding: 1rem 1.5rem;
+    margin-right: 1rem;
+    cursor: not-allowed;
+}
+
+.card__btn-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.primary-btn {
+    border: 0;
+    text-decoration: none;
+    font-size: 1.6rem;
+    display: inline-block;
+    background-color: #6141b9;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    outline: 0;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.primary-btn:hover {
+    background-color: #6f4ec9;
+    transform: translateY(-2px);
+}
+
+.warning-btn {
+    border: 0;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: #c90324;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: all .2s;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    cursor: pointer;
+}
+
+.warning-btn:hover {
+    background-color: #eb042a;
+}

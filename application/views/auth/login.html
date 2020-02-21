@@ -1,0 +1,33 @@
+{% extends "layout/base.html" %}
+
+{% block maincontent %}
+<main class="section mt-60">
+    <div class="login">
+        <form class="form" id="js-login__form" action="" method="POST">
+            <h2 class="form__heading">User Login</h2>
+            {% if auth_error %}
+                <div class="error-box">
+                    <span>{{ auth_error }}</span>
+                </div>
+            {% endif %}
+            <div class="form__group">
+                <label for="" class="form__label">Email</label>
+                <input type="email" id="js-login-email" class="form__input h-35 form__input--grey-light" name="email" value="{{ email }}">
+                <span class="error_msg"></span>
+            </div>
+            <div class="form__group">
+                <label for="" class="form__label">Password</label>
+                <input type="password" id="js-login-password" class="form__input h-35 form__input--grey-light" name="password">
+                <span class="error_msg"></span>
+            </div>
+            <div class="form__group">
+                <button class="btn btn__search" id="js-login-btn">Login</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ constant('JS_PATH') }}/auth_login.js"></script>
+{% endblock %}

@@ -1,0 +1,430 @@
+{% extends "addon/admin_base.html" %}
+
+{% block admin_content %}
+    <form name="registrationForm" class="form profile-edit" id="js-form-reg" action="{{ constant('ROOTURL') }}/addon/profile-update" method="POST">
+        <h2 class="form__heading">Doctor Registration Form</h2>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Firstname</label>
+                    <input type="text" id="js-reg-fname" class="form__input h-35" name="fname" value="{{ user.fname }}">
+                    <p id="err-fname" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Lastname</label>
+                    <input type="text" id="js-reg-lname" class="form__input h-35" name="lname" value="{{ user.lname }}">
+                    <p id="err-lname" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">User mode</label>
+                    <select type="text" id="js-reg-mode" class="form__input h-35" name="mode">
+                        <option value="doctor" selected>As Doctor</option>
+                    </select>
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Speciality</label>
+                    <select type="text" id="js-reg-speciality" class="form__input h-35" name="speciality">
+                        {% for special in specialities %}
+                            <option value="{{ special.speciality_name|title }}" 
+                            {% if special.speciality_name|lower is same as(user.speciality|lower) %}
+                                selected
+                            {% endif %}
+                            >{{ special.speciality_name|title }}</option>
+                        {% endfor %}
+                    </select>
+                    <p id="err-speciality" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <label for="" class="form__label">Email</label>
+            <input type="email" id="js-reg-email" class="form__input h-35" name="email" value="{{ user.email }}">
+            <p id="err-email" class="error_msg">{{ error }}</p>
+        </div>
+        <input type="hidden" name="user_id" value="{{ user.userId }}">
+        <div class="form__group">
+            <button class="btn btn__search" id="reg-submit-btn">Save</button>
+        </div>
+    </form>
+
+    {# personal information form #}
+    <form class="form profile-edit" action="{{ constant('ROOTURL') }}/addon/personal-info" method="POST" enctype="multipart/form-data">
+        <h2 class="form__heading">Personal Information</h2>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Registration No.</label>
+                    <input type="text" class="form__input h-35" name="reg_no" value="{{ user.reg_no }}">
+                    <p id="err-fname" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Gender</label>
+                    <select name="gender" id="" class="form__input h-35">
+                        <option value="male" {{ user.gender == 'male' ? 'selected' }}>Male</option>
+                        <option value="female" {{ user.gender == 'female' ? 'selected' }}>Female</option>
+                    </select>
+                    <p id="err-lname" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Hometown</label>
+                    <input type="text" class="form__input h-35" name="hometown" value="{{ user.home_location }}">
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Current Location</label>
+                    <input type="text" class="form__input h-35" name="current_location" value="{{ user.current_location }}">
+                    <p id="err-speciality" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Date of birth</label>
+                    <input type="date" class="form__input h-35" name="dob" value="{{ user.dob }}">
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Mobile No.</label>
+                    <input type="number" class="form__input h-35" name="mobile" value="{{ user.mobile }}">
+                    <p id="err-speciality" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Year of experience</label>
+                    <input type="text" class="form__input h-35" name="experience" value="{{ user.year_exp }}">
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Fees</label>
+                    <input type="number" class="form__input h-35" name="fees" value="{{ user.fees }}">
+                    <p id="err-speciality" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">About yourself</label>
+                    <textarea name="about" class="form__input" cols="30" rows="5">{{ user.about }}</textarea>
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Upload image</label>
+                    {% if user.user_img %}
+                    <img src="{{ constant('IMAGE_PATH') }}/users/{{ user.user_img }}" alt="User Image" width="120" height="120">
+                    {% endif %}
+                    <input type="file" class="h-35" name="profile_pic">
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="id" value="{{ user.userId }}">
+        <div class="form__group">
+            <button class="btn btn__search">Save</button>
+        </div>
+    </form>
+
+    {# qualification information form #}
+    <form class="form profile-edit" action="{{ constant('ROOTURL') }}/addon/qualification" method="POST">
+        <h2 class="form__heading">Educational qualification</h2>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Add school, college, university</label>
+                        <select type="text" id="js-reg-level" class="form__input h-35" name="level">
+                            <option value="school">School</option>
+                            <option value="college">College</option>
+                            <option value="university">University</option>
+                        </select>
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Year of passing</label>
+                    <input type="number" class="form__input h-35" name="passing_year" placeholder="e.g 2015, 2000...">
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <label for="" class="form__label">Institute Name</label>
+            <input type="text" id="js-reg-institute" class="form__input h-35" name="institute">
+            <p id="err-institute" class="error_msg">{{ error }}</p>
+        </div>
+        <div class="form__group">
+            <label for="" class="form__label">Course Name</label>
+            <input type="text" id="js-reg-course" class="form__input h-35" name="course">
+            <p id="err-course" class="error_msg">{{ error }}</p>
+        </div>
+        <input type="hidden" name="id" value="{{ user.userId }}">
+        <div class="form__group">
+            <button class="btn btn__search">Save</button>
+        </div>
+    </form>
+
+    {% for edu_info in qualification %}
+    <div class="card-edu-box">
+        <div class="card-edu">
+            <h2 class="card-edu__institute">{{ edu_info.institute }}</h2>
+            <p class="card-edu__course">{{ edu_info.course_name }}, {{ edu_info.passing_year }}</p>
+            <span class="card-edu__close edu-close" data-href="{{ constant('ROOTURL') }}/addon/delete-qualification/{{ edu_info.id }}">&times;</span>
+            <span class="card-edu__edit edu-edit" id="js-edu-edit">Edit</span>
+
+            {# qualification form - UPDATE #}
+            <form id="myForm" action="{{ constant('ROOTURL') }}/addon/update-qualification/{{ edu_info.id }}" method="POST" class="update-form">
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Institute Name</label>
+                    <input type="text" class="update-form__input" name="institute" value="{{ edu_info.institute }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Course Name</label>
+                    <input type="text" class="update-form__input" name="course" value="{{ edu_info.course_name }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Year of passing</label>
+                    <input type="text" class="update-form__input" name="passing_year" value="{{ edu_info.passing_year }}">
+                </div>
+                <input type="submit" value="Update" class="update-form__btn">
+            </form>
+        </div>
+    </div>
+    {% endfor %} {# end of qualification information form #}
+    <div class="profile-edit"></div>
+
+    {# Chamber address information #}
+    <form class="form profile-edit" action="{{ constant('ROOTURL') }}/addon/chamber" method="POST">
+        <h2 class="form__heading">Chamber Address</h2>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Address</label>
+                    <input type="text" class="form__input h-35" name="address" value="">
+                    <p id="err-fname" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">City</label>
+                    <input type="text" class="form__input h-35" name="city" value="">
+                    <p id="err-fname" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">District</label>
+                    <input type="text" class="form__input h-35" name="district" value="">
+                    <p id="err-fname" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Pincode</label>
+                    <input type="text" class="form__input h-35" name="pin" value="">
+                    <p id="err-fname" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">State</label>
+                    <input type="text" class="form__input h-35" name="state" value="">
+                    <p id="err-fname" class="error_msg"></p>
+                </div>
+                <div class="form__group-row form__input-width--50">
+                    <input type="hidden" class="form__input h-35" name="id" value="{{ user.userId }}">
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <button class="btn btn__search">Save</button>
+        </div>
+    </form>
+
+    {% for chamber in chamber_addr %}
+    <div class="card-edu-box">
+        <div class="card-edu">
+            <h2 class="card-edu__institute">{{ chamber.address }}</h2>
+            <p class="card-edu__course">{{ chamber.city }}, {{ chamber.district }}, {{ chamber.state }}, {{ chamber.pincode }}</p>
+            <span class="card-edu__close edu-close" data-href="{{ constant('ROOTURL') }}/addon/delete-chamber/{{ chamber.id }}">&times;</span>
+            <span class="card-edu__edit edu-edit" id="js-edu-edit">Edit</span>
+
+            {# chamber address form - UPDATE #}
+            <form id="myForm" action="{{ constant('ROOTURL') }}/addon/chamber/{{ chamber.id }}" method="POST" class="update-form">
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Address</label>
+                    <input type="text" class="update-form__input" name="address" value="{{ chamber.address }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">City</label>
+                    <input type="text" class="update-form__input" name="city" value="{{ chamber.city }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">District</label>
+                    <input type="text" class="update-form__input" name="district" value="{{ chamber.district }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Pincode</label>
+                    <input type="text" class="update-form__input" name="pin" value="{{ chamber.pincode }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">State</label>
+                    <input type="text" class="update-form__input" name="state" value="{{ chamber.state }}">
+                </div>
+                <input type="submit" value="Update" class="update-form__btn">
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="profile-edit"></div>
+
+    {# time table for chambers #}
+    <form class="form profile-edit" action="{{ constant('ROOTURL') }}/addon/addtime" method="POST">
+        <h2 class="form__heading">Chamber Time table</h2>
+        <div class="form__group">
+            <div class="form__group--inline">
+                <div class="form__group-row form__input-width--50">
+                    <label for="" class="form__label">Select Chamber address</label>
+                        <select type="text" id="js-reg-level" class="form__input h-35" name="chamber_addr">
+                            {% for chamber in chamber_addr %}
+                                <option value="{{ chamber.id }}">{{ chamber.address }}, {{ chamber.city }}, {{ chamber.state }}, {{ chamber.pincode }}</option>
+                            {% endfor %}
+                        </select>
+                    <p id="err-mode" class="error_msg"></p>
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <label for="" class="time-table__label">Monday</label>
+            <input type="time" name="mon_start"> <span class="time-table__to"> to </span> <input type="time" name="mon_end">
+        </div>
+        <div class="form__group">
+            <label for="" class="time-table__label">Tuesday</label>
+            <input type="time" name="tues_start"> <span class="time-table__to"> to </span> <input type="time" name="tues_end">
+        </div>
+        <div class="form__group">
+            <label for="" class="time-table__label">Wednesday</label>
+            <input type="time" name="wed_start"> <span class="time-table__to"> to </span> <input type="time" name="wed_end">
+        </div>
+        <div class="form__group">
+            <label for="" class="time-table__label">Thusday</label>
+            <input type="time" name="thus_start"> <span class="time-table__to"> to </span> <input type="time" name="thus_end">
+        </div>
+        <div class="form__group">
+            <label for="" class="time-table__label">Friday</label>
+            <input type="time" name="fri_start"> <span class="time-table__to"> to </span> <input type="time" name="fri_end">
+        </div>
+        <div class="form__group">
+            <label for="" class="time-table__label">Saturday</label>
+            <input type="time" name="sat_start"> <span class="time-table__to"> to </span> <input type="time" name="sat_end">
+        </div>
+        <div class="form__group">
+            <label for="" class="time-table__label">Sunday</label>
+            <input type="time" name="sun_start"> <span class="time-table__to"> to </span> <input type="time" name="sun_end">
+        </div>
+        <div class="form__group">
+            <button class="btn btn__search">Save</button>
+        </div>
+    </form>
+
+    {# time table UPDATE & DELETE #}
+    {% for chamber_time in chambers_time %}
+    <div class="card-edu-box">
+        <div class="card-edu">
+            <h2 class="card-edu__institute">{{ chamber_time.address }}</h2>
+            <p class="card-edu__course">{{ chamber_time.city }}, {{ chamber_time.state }}, {{ chamber_time.pincode }}</p>
+            <table>
+                <tr>
+                    <th>Day</th>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
+                <tr>
+                    <td>Monday</td>
+                    <td>{{ chamber_time.monday_start|date("h:i a") }}</td>
+                    <td>{{ chamber_time.monday_end|date("h:i a") }}</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>{{ chamber_time.tuesday_start|date("h:i a") }}</td>
+                    <td>{{ chamber_time.tuesday_end|date("h:i a") }}</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>{{ chamber_time.wednesday_start|date("h:i a") }}</td>
+                    <td>{{ chamber_time.wednesday_end|date("h:i a") }}</td>
+                </tr>
+                <tr>
+                    <td>Thusday</td>
+                    <td>{{ chamber_time.thusday_start|date("h:i a") }}</td>
+                    <td>{{ chamber_time.thusday_end|date("h:i a") }}</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>{{ chamber_time.friday_start|date("h:i a") }}</td>
+                    <td>{{ chamber_time.friday_end|date("h:i a") }}</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>{{ chamber_time.saturday_start|date("h:i a") }}</td>
+                    <td>{{ chamber_time.saturday_end|date("h:i a") }}</td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td>{{ chamber_time.sunday_start|date("h:i a") }}</td>
+                    <td>{{ chamber_time.sunday_end|date("h:i a") }}</td>
+                </tr>
+            </table>
+            <span class="card-edu__close edu-close" data-href="{{ constant('ROOTURL') }}/addon/time/del/{{ chamber_time.id }}">&times;</span>
+            <span class="card-edu__edit edu-edit" id="js-edu-edit">Edit</span>
+
+            {# chamber time form - UPDATE #}
+            <form id="myForm" action="{{ constant('ROOTURL') }}/addon/time/edit/{{ chamber_time.id }}" method="POST" class="update-form">
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Monday</label>
+                    <input type="time" name="mon_start" value="{{ chamber_time.monday_start }}"> <span class="time-table__to"> to </span> <input type="time" name="mon_end" value="{{ chamber_time.monday_end }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Tuesday</label>
+                    <input type="time" name="tues_start" value="{{ chamber_time.tuesday_start }}"> <span class="time-table__to"> to </span> <input type="time" name="tues_end" value="{{ chamber_time.tuesday_end }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Wednesday</label>
+                    <input type="time" name="wed_start" value="{{ chamber_time.wednesday_start }}"> <span class="time-table__to"> to </span> <input type="time" name="wed_end" value="{{ chamber_time.wednesday_end }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Thusday</label>
+                    <input type="time" name="thus_start" value="{{ chamber_time.thusday_start }}"> <span class="time-table__to"> to </span> <input type="time" name="thus_end" value="{{ chamber_time.thusday_end }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Friday</label>
+                    <input type="time" name="fri_start" value="{{ chamber_time.friday_start }}"> <span class="time-table__to"> to </span> <input type="time" name="fri_end" value="{{ chamber_time.friday_end }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Saturday</label>
+                    <input type="time" name="sat_start" value="{{ chamber_time.saturday_start }}"> <span class="time-table__to"> to </span> <input type="time" name="sat_end" value="{{ chamber_time.saturday_end }}">
+                </div>
+                <div class="update-form__group">
+                    <label for="" class="update-form__label">Sunday</label>
+                    <input type="time" name="sun_start" value="{{ chamber_time.sunday_start }}"> <span class="time-table__to"> to </span> <input type="time" name="sun_end" value="{{ chamber_time.sunday_end }}">
+                </div>
+                <input type="submit" value="Update" class="update-form__btn">
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ constant('JS_PATH') }}/addon_editprofile.js"></script>
+{% endblock %}

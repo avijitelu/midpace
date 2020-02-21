@@ -1,0 +1,8 @@
+/application/cache/
+/public/assets/build/
+/public/assets/dev/es5/
+/public/images/
+/node_modules/
+/vendor/
+/application/db/
+/error_log

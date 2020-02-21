@@ -1,0 +1,14 @@
+// .heading {}
+
+.heading__primary {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+
+    @media(max-width: 550px) {
+        font-size: 2rem;
+    }
+
+    @media(max-width: 367px) {
+        font-size: 1.8rem;
+    }
+}
